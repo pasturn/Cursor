@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   {% if title %}
+        <title>{{title}} - Cursor</title>
+    {% else %}
+        <title>Cursor</title>
+    {% endif %}
+  <!-- ========== Css Files ========== -->
+  <link href="{{url_for('static', filename='css/root.css')}}" rel="stylesheet">
+  <style type="text/css">
+    body{background: #F5F5F5;}
+  </style>
+  </head>
+  <body>
+
+    <div class="login-form">
+      <form action="" method="post" name="register">
+        <div class="top">
+          <h1>Register</h1>
+          <h4>Join to our community now !</h4>
+        </div>
+           {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                 <div class="notify-wrap">
+                    {% for message in messages %}
+                        <div class="kode-alert kode-alert-icon alert5-light">
+                            <i class="fa fa-warning"></i>
+                            <a href="#" class="closed">×</a>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+            {% endwith %}
+        <div class="form-area">
+          {{ form.hidden_tag() }}
+          <div class="group {% if form.username.errors %}has-error{% endif %}">
+              {{ form.username(size=60, class="form-control", placeholder="Username") }}
+              <i class="fa fa-user"></i>
+              {% if form.username.errors %}
+              <span class="control-label">{{ form.username.errors }}</span>
+              {% endif %}
+          </div>
+          <div class="group {% if form.email.errors %}has-error{% endif %}">
+              {{ form.email(size=120, class="form-control", placeholder="Email") }}
+              <i class="fa fa-envelope-o"></i>
+              {% if form.email.errors %}
+              <span class="control-label">{{ form.email.errors }}</span>
+              {% endif %}
+          </div>
+          <div class="group">
+              {{ form.password(size=16, class="form-control", placeholder="Password") }}
+              <i class="fa fa-key"></i>
+          </div>
+          <div class="group">
+              {{ form.password2(size=16, class="form-control", placeholder="Password again") }}
+            <i class="fa fa-key"></i>
+          </div>
+          <button type="submit" class="btn btn-default btn-block">REGISTER NOW</button>
+        </div>
+      </form>
+      <div class="footer-links row">
+        <div class="col-xs-6"><a href="{{url_for('auth.login')}}"><i class="fa fa-sign-in"></i> Login</a></div>
+        <div class="col-xs-6 text-right"><a href="#"><i class="fa fa-lock"></i> Forgot password</a></div>
+      </div>
+    </div>
+
+</body>
+</html>

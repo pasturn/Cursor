@@ -1,0 +1,310 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- START CONTENT -->
+
+ <!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- START CONTENT -->
+<div class="content">
+
+  <!-- Start Page Header -->
+  <div class="page-header">
+    {% if title %}
+        <h1 class="title">{{title}}</h1>
+    {% endif %}
+
+      <ol class="breadcrumb">
+        <li class="active">You have <span class="label label-danger">5</span> unread messages</li>
+      </ol>
+
+    <!-- Start Page Header Right Div -->
+    <div class="right">
+      <a href="#" class="btn btn-danger"><i class="fa fa-pencil"></i> COMPOSE</a>
+    </div>
+    <!-- End Page Header Right Div -->
+
+  </div>
+  <!-- End Page Header -->
+
+ <!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- START CONTAINER -->
+<div class="container-mail">
+
+
+
+<!-- Start Mailbox -->
+<div class="mailbox clearfix">
+
+  <!-- Start Mailbox Menu -->
+  <div class="mailbox-menu">
+    <ul class="menu">
+      <li><a href="#"><i class="fa fa-inbox"></i> Inbox</a></li>
+      <li><a href="#"><i class="fa fa-flag-o"></i> Important</a></li>
+      <li><a href="#"><i class="fa fa-paper-plane-o"></i> Sent</a></li>
+      <li><a href="#"><i class="fa fa-trash"></i> Trash</a></li>
+    </ul>
+
+  </div>
+  <!-- End Mailbox Menu -->
+
+  <!-- Start Mailbox Container -->
+  <div class="container-mailbox">
+
+        <!-- Start Mailbox Inbox -->
+        <div class="col-lg-3 col-md-4 padding-0">
+        <ul class="mailbox-inbox">
+
+            <li class="search">
+              <form>
+                <input type="text" class="mailbox-search" id="mailboxsearch" placeholder="Search">
+                <span class="searchbutton"><i class="fa fa-search"></i></span>
+              </form>
+            </li>
+
+            <li>
+              <a href="#" class="item clearfix">
+                <img src="img/profileimg.png" alt="img" class="img">
+                <span class="from">Jonathan Doe</span>
+                Hello, m8 how is goin ?
+                <span class="date">22 May</span>
+              </a>
+            </li>
+
+        </ul>
+        </div>
+        <!-- End Mailbox Inbox -->
+
+        <!-- Start Chat -->
+        <div class="chat col-lg-9 col-md-8 padding-0">
+
+          <!-- Start Title -->
+          <div class="title">
+            <h1>Index Design and Some Advice <small>( mail@jonathandoe.com )</small></h1>
+            <p><b>To:</b> Me, Jane, John</p>
+              <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-icon btn-sm btn-light"><i class="fa fa-share"></i></button>
+                <button type="button" class="btn btn-icon btn-sm btn-light"><i class="fa fa-star-o"></i></button>
+                <button type="button" class="btn btn-icon btn-sm btn-light"><i class="fa fa-trash"></i></button>
+              </div>
+          </div>
+          <!-- End Title -->
+
+          <!-- Start Conv -->
+          <ul class="conv">
+
+            <li>
+              <img src="img/profileimg3.png" alt="img" class="img">
+              <p class="ballon color1">Problems look mighty small from 150 miles up.</p><br>
+              <p class="ballon color1">For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us.</p><br>
+              <p class="addition"><i class="fa fa-file-o"></i><b>Index.psd</b> - 32 MB - <a href="#">Download</a></p>
+            <li>
+
+            <li>
+              <img src="img/profileimg.png" alt="img" class="img">
+              <p class="ballon color2">I'm working on it</p><br>
+            <li>
+
+            <li class="date">Last Message: <b>1 hours</b> ago</li>
+
+            <li>
+              <img src="img/profileimg.png" alt="img" class="img">
+              <p class="ballon color2">Done, Uploading one sec.</p><br>
+              <p class="ballon color2">Here ༼ つ ◕_◕ ༽つ</p><br>
+              <p class="addition"><i class="fa fa-file-o"></i><b>New-Index.psd</b> - 36 MB - <a href="#">Download</a></p>
+            <li>
+
+            <li>
+              <img src="img/profileimg3.png" alt="img" class="img">
+              <p class="ballon color1">Thanks, it works perfectly</p><br>
+              <p class="ballon color1">...</p><br>
+            <li>
+
+          </ul>
+          <!-- End Conv -->
+
+          <div class="write">
+              <form class="margin-b-20">
+                <p><textarea class="textarea form-control wysihtml5-textarea" placeholder="Enter text ..."  style="height:200px; width:100%;"></textarea></p>
+
+                <button class="btn btn-default">Send Post</button>
+                <button type="reset" class="btn margin-l-5">Clear</button>
+              </form>
+          </div>
+
+
+        </div>
+        <!-- End Chat -->
+
+  </div>
+  <!-- End Mailbox Container -->
+
+</div>
+<!-- End Mailbox -->
+
+
+</div>
+<!-- END CONTAINER -->
+ <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+<!-- Start Footer -->
+<div class="row footer">
+  <div class="col-md-6 text-left">
+  Copyright © 2015 <a href="http://www.17sucai.com/" target="_blank">17素材</a> All rights reserved.
+  </div>
+  <div class="col-md-6 text-right">
+    Design and Developed by <a href="http://www.17sucai.com/" target="_blank">17素材</a>
+  </div>
+</div>
+<!-- End Footer -->
+
+
+</div>
+<!-- End Content -->
+ <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- START SIDEPANEL -->
+<div role="tabpanel" class="sidepanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#today" aria-controls="today" role="tab" data-toggle="tab">TODAY</a></li>
+    <li role="presentation"><a href="#tasks" aria-controls="tasks" role="tab" data-toggle="tab">TASKS</a></li>
+    <li role="presentation"><a href="#chat" aria-controls="chat" role="tab" data-toggle="tab">CHAT</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+
+    <!-- Start Today -->
+    <div role="tabpanel" class="tab-pane active" id="today">
+
+      <div class="sidepanel-m-title">
+        Today
+        <span class="left-icon"><a href="#"><i class="fa fa-refresh"></i></a></span>
+        <span class="right-icon"><a href="#"><i class="fa fa-file-o"></i></a></span>
+      </div>
+
+      <div class="gn-title">NEW</div>
+
+      <ul class="list-w-title">
+        <li>
+          <a href="#">
+            <span class="label label-danger">ORDER</span>
+            <span class="date">9 hours ago</span>
+            <h4>New Jacket 2.0</h4>
+            Etiam auctor porta augue sit amet facilisis. Sed libero nisi, scelerisque.
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="label label-success">COMMENT</span>
+            <span class="date">14 hours ago</span>
+            <h4>Bill Jackson</h4>
+            Etiam auctor porta augue sit amet facilisis. Sed libero nisi, scelerisque.
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="label label-info">MEETING</span>
+            <span class="date">at 2:30 PM</span>
+            <h4>Developer Team</h4>
+            Etiam auctor porta augue sit amet facilisis. Sed libero nisi, scelerisque.
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="label label-warning">EVENT</span>
+            <span class="date">3 days left</span>
+            <h4>Birthday Party</h4>
+            Etiam auctor porta augue sit amet facilisis. Sed libero nisi, scelerisque.
+          </a>
+        </li>
+      </ul>
+
+    </div>
+    <!-- End Today -->
+
+    <!-- Start Tasks -->
+    <div role="tabpanel" class="tab-pane" id="tasks">
+
+      <div class="sidepanel-m-title">
+        To-do List
+        <span class="left-icon"><a href="#"><i class="fa fa-pencil"></i></a></span>
+        <span class="right-icon"><a href="#"><i class="fa fa-trash"></i></a></span>
+      </div>
+
+      <div class="gn-title">TODAY</div>
+
+      <ul class="todo-list">
+        <li class="checkbox checkbox-primary">
+          <input id="checkboxside1" type="checkbox"><label for="checkboxside1">Add new products</label>
+        </li>
+
+        <li class="checkbox checkbox-primary">
+          <input id="checkboxside2" type="checkbox"><label for="checkboxside2"><b>May 12, 6:30 pm</b> Meeting with Team</label>
+        </li>
+
+        <li class="checkbox checkbox-warning">
+          <input id="checkboxside3" type="checkbox"><label for="checkboxside3">Design Facebook page</label>
+        </li>
+
+        <li class="checkbox checkbox-info">
+          <input id="checkboxside4" type="checkbox"><label for="checkboxside4">Send Invoice to customers</label>
+        </li>
+
+        <li class="checkbox checkbox-danger">
+          <input id="checkboxside5" type="checkbox"><label for="checkboxside5">Meeting with developer team</label>
+        </li>
+      </ul>
+
+      <div class="gn-title">TOMORROW</div>
+      <ul class="todo-list">
+        <li class="checkbox checkbox-warning">
+          <input id="checkboxside6" type="checkbox"><label for="checkboxside6">Redesign our company blog</label>
+        </li>
+
+        <li class="checkbox checkbox-success">
+          <input id="checkboxside7" type="checkbox"><label for="checkboxside7">Finish client work</label>
+        </li>
+
+        <li class="checkbox checkbox-info">
+          <input id="checkboxside8" type="checkbox"><label for="checkboxside8">Call Johnny from Developer Team</label>
+        </li>
+
+      </ul>
+    </div>
+    <!-- End Tasks -->
+
+    <!-- Start Chat -->
+    <div role="tabpanel" class="tab-pane" id="chat">
+
+      <div class="sidepanel-m-title">
+        Friend List
+        <span class="left-icon"><a href="#"><i class="fa fa-pencil"></i></a></span>
+        <span class="right-icon"><a href="#"><i class="fa fa-trash"></i></a></span>
+      </div>
+
+      <div class="gn-title">ONLINE MEMBERS (3)</div>
+      <ul class="group">
+        <li class="member"><a href="#"><img src="img/profileimg.png" alt="img"><b>Allice Mingham</b>Los Angeles</a><span class="status online"></span></li>
+        <li class="member"><a href="#"><img src="img/profileimg2.png" alt="img"><b>James Throwing</b>Las Vegas</a><span class="status busy"></span></li>
+        <li class="member"><a href="#"><img src="img/profileimg3.png" alt="img"><b>Fred Stonefield</b>New York</a><span class="status away"></span></li>
+        <li class="member"><a href="#"><img src="img/profileimg4.png" alt="img"><b>Chris M. Johnson</b>California</a><span class="status online"></span></li>
+      </ul>
+
+      <div class="gn-title">OFFLINE MEMBERS (8)</div>
+     <ul class="group">
+        <li class="member"><a href="#"><img src="img/profileimg5.png" alt="img"><b>Allice Mingham</b>Los Angeles</a><span class="status offline"></span></li>
+        <li class="member"><a href="#"><img src="img/profileimg6.png" alt="img"><b>James Throwing</b>Las Vegas</a><span class="status offline"></span></li>
+      </ul>
+
+      <form class="search">
+        <input type="text" class="form-control" placeholder="Search a Friend...">
+      </form>
+    </div>
+    <!-- End Chat -->
+
+  </div>
+
+</div>
+{% endblock %}
