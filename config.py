@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 __author__ = 'Pasturn'
 
 import os
@@ -9,7 +10,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     FLASKY_MAIL_SUBJECT_PREFIX = '[Cursor]'
     FLASKY_MAIL_SENDER = 'Pasturn <pasturn@qq.com'
-    FLASKY_ADMIN = os.environ.get('CURSOR_ADMIN')
+    FLASKY_ADMIN = os.environ.get('CURSOR_ADMIN') or 'admin@pasturn.com'
 
     @staticmethod
     def init_app(app):
@@ -22,15 +23,18 @@ class DevelopmentConfig(Config):
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or 'mysql+pymysql://root:67859253@localhost/blog'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') \
+                              or 'mysql+pymysql://root:67859253@localhost/blog?charset=utf8'
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or 'mysql+pymysql://root:67859253@localhost/blog'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') \
+                              or 'mysql+pymysql://root:67859253@localhost/blog?charset=utf8'
 
 class ProductionConfig(Config):
     CSRF_ENABLED = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'mysql+pymysql://root:67859253@localhost/blog'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') \
+                              or 'mysql+pymysql://root:67859253@localhost/blog?charset=utf8'
 
 config = {
     'development': DevelopmentConfig,

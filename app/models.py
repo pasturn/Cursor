@@ -1,15 +1,18 @@
 __author__ = 'Pasturn'
 
+import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
+from flask_login import UserMixin, AnonymousUserMixin
+from . import login_manager
 from . import db
 from urllib.parse import urlparse, urlunparse
 
 unicode = str
 
 
+# 权限角色模型
 class Roles(db.Model):
     __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
@@ -17,7 +20,8 @@ class Roles(db.Model):
     default = db.Column(db.Boolean, default=False, index=True)
     permissions = db.Column(db.Integer)
     user = db.relationship('Users', backref = 'role', lazy = 'dynamic')
-# 在数据库中创建角色
+
+    # 在数据库中创建角色
     @staticmethod
     def insert_roles():
         roles = {
@@ -48,6 +52,7 @@ class Permission:
     ADMINISTER = 0x80
 
 
+# 用户模型
 class Users(db.Model, UserMixin):
     __tablename__ = 'users'
     user_id = db.Column(db.Integer, primary_key=True)
@@ -57,6 +62,23 @@ class Users(db.Model, UserMixin):
     email = db.Column(db.String(120), index=True, unique=True)
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     confirmed = db.Column(db.Boolean, default=False)
+    name = db.Column(db.String(64))
+    location = db.Column(db.String(64))
+    about_me = db.Column(db.Text)
+    member_since = db.Column(db.DateTime(), default = datetime.datetime.utcnow)
+    last_seen = db.Column(db.DateTime(), default = datetime.datetime.utcnow)
+    posts = db.relationship('Posts', backref = 'author', lazy = 'dynamic')
+
+
+
+    def __init__(self, **kwargs):
+        super(Users, self).__init__(**kwargs)
+        if self.role is None:
+            if self.email == current_app.config['CURSOR_ADMIN']:
+                self.role = Roles.query.filter_by(permissions=0xff).first()
+            if self.role is None:
+                self.role = Roles.query.filter_by(default=True).first()
+
 
     @property
     def password(self):
@@ -89,6 +111,19 @@ class Users(db.Model, UserMixin):
         db.session.add(self)
         return True
 
+    # 在请求和赋予角色这两种权限之间进行位操作
+    def can(self, permissions):
+        return self.role is not None and (self.role.permissions & permissions) == permissions
+
+    def is_administrator(self):
+        return self.can(Permission.ADMINISTER)
+
+    def ping(self):
+        self.last_seen = datetime.datetime.utcnow()
+        db.session.add(self)
+
+    def is_authenticated(self):
+        return True
     # 修复id属性不一致
     def get_id(self):
         try:
@@ -96,25 +131,24 @@ class Users(db.Model, UserMixin):
         except NameError:
             return str(self.user_id)  # python 3
 
+class AnonymousUser(AnonymousUserMixin):
+    def can(self, permissions):
+        return False
 
-# class Posts(db.Model):
-#     __tablename__ = 'posts'
-#     id = db.Column(db.Integer, primary_key = True)
-#     title = db.Column(db.String(200))
-#     body = db.Column(db.Text(66500))
-#     timestamp = db.Column(db.DateTime)
-#     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-#
-#     def __init__(self, title, body, timestamp, user_id):
-#         self.title = title
-#         self.body = body
-#         self.timestamp = timestamp,
-#         self.user_id = user_id
-#
-#     def __repr__(self):
-#         return '<Post %r>' % (self.body)
+    def is_administrator(self):
+        return False
 
-from . import login_manager
+login_manager.anonymous_user = AnonymousUser
+
+
+class Posts(db.Model):
+    __tablename__ = 'posts'
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(200))
+    body = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, index=True, default= datetime.datetime.utcnow())
+    author_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+
 
 
 @login_manager.user_loader

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+  <!-- Start Page Header -->
+  <div class="page-header">
+    <h1 class="title">Posts</h1>
+      <ol class="breadcrumb">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="#">Forms</a></li>
+        <li class="active">Layouts</li>
+      </ol>
+
+  </div>
+
+<!-- START CONTAINER -->
+<div class="container-padding">
+
+
+  
+  <!-- Start Row -->
+  <div class="row">
+    
+
+    <div class="col-md-12 col-lg-12">
+      <div class="panel panel-default">
+
+        <div class="panel-title">
+          Basic Form
+          <ul class="panel-tools">
+            <li><a class="icon minimise-tool"><i class="fa fa-minus"></i></a></li>
+            <li><a class="icon expand-tool"><i class="fa fa-expand"></i></a></li>
+            <li><a class="icon closed-tool"><i class="fa fa-times"></i></a></li>
+          </ul>
+        </div>
+
+            <div class="panel-body">
+              <form method="post" action="" name="PostForm">
+                  {{ form.hidden_tag() }}
+                <div class="form-group">
+                  <label for="input1" class="form-label">标题</label>
+                  {{form.title(size=60, class="form-control", id="input1", placeholder="Title")}}
+                </div>
+                <div class="form-group">
+                  <label class="form-label">内容</label>
+                    {{form.body(rows="3", class="form-control", id="input2", placeholder="Post")}}
+                </div>
+               {{ form.submit(class="btn btn-default")}}
+              </form>
+
+            </div>
+
+      </div>
+    </div>
+
+  </div>
+  <!-- End Row -->
+
+</div>
+<!-- END CONTAINER -->
+ <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+
+
+{% endblock %}
