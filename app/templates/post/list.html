@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+  <!-- Start Page Header -->
+<!-- Start Page Header -->
+  <div class="page-header">
+    <h1 class="title">Basic Tables</h1>
+      <ol class="breadcrumb">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="#">Tables</a></li>
+        <li class="active">Basic Tables</li>
+      </ol>
+
+    <!-- End Page Header Right Div -->
+</div>
+<!-- START CONTAINER -->
+<div class="container-padding">
+
+
+  <!-- Start Row -->
+  <div class="row">
+
+    <!-- Start Panel -->
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-title">
+          Default Table
+        </div>
+        <div class="panel-body table-responsive">
+
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <td class="text-center"><i class="fa fa-trash"></i></td>
+                <td>序号</td>
+                <td>标题</td>
+                <td>时间</td>
+                <td>操作</td>
+              </tr>
+            </thead>
+            <tbody>
+            {% for post in posts %}
+              <tr>
+                <td class="text-center"><div class="checkbox margin-t-0"><input id="checkbox{{post.id}}" type="checkbox"><label for="checkbox{{post.id}}"></label></div></td>
+                <td><b>{{post.id}}</b></td>
+                <td>{{post.title}}</td>
+                <td>{{post.timestamp}}</td>
+                <td>编辑</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+    <!-- End Panel -->
+
+
+</div>
+</div>
+<!-- END CONTAINER -->
+ <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+
+
+{% endblock %}

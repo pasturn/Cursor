@@ -44,10 +44,17 @@ def post():
     form = PostForm()
     print(form.validate_on_submit())
     if form.validate_on_submit():
-        post = Posts(title=form.title.data, body=form.body.data)
+        post = Posts(title=form.title.data, body=form.body.data,
+                     author=current_user._get_current_object())
 
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('.post'))
     posts = Posts.query.order_by(Posts.timestamp.desc()).all()
     return render_template('post/post.html', form=form, posts=posts)
+
+
+@main.route('/post/list')
+def post_list():
+    posts = Posts.query.order_by(Posts.id.desc()).all()
+    return render_template('post/list.html',posts=posts)

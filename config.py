@@ -8,9 +8,9 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'jdkfja34234kjnsd'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    FLASKY_MAIL_SUBJECT_PREFIX = '[Cursor]'
-    FLASKY_MAIL_SENDER = 'Pasturn <pasturn@qq.com'
-    FLASKY_ADMIN = os.environ.get('CURSOR_ADMIN') or 'admin@pasturn.com'
+    CURSOR_MAIL_SUBJECT_PREFIX = '[Cursor]'
+    CURSOR_MAIL_SENDER = 'Pasturn <pasturn@qq.com'
+    CURSOR_ADMIN = os.environ.get('CURSOR_ADMIN') or 'admin@pasturn.com'
 
     @staticmethod
     def init_app(app):
@@ -29,12 +29,12 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') \
-                              or 'mysql+pymysql://root:67859253@localhost/blog?charset=utf8'
+                              or 'mysql+pymysql://root:67859253@localhost/blog/cms?charset=utf8'
 
 class ProductionConfig(Config):
     CSRF_ENABLED = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') \
-                              or 'mysql+pymysql://root:67859253@localhost/blog?charset=utf8'
+                              or 'mysql+pymysql://root:67859253@localhost/blog/cms?charset=utf8'
 
 config = {
     'development': DevelopmentConfig,

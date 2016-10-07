@@ -65,9 +65,9 @@ class Users(db.Model, UserMixin):
     name = db.Column(db.String(64))
     location = db.Column(db.String(64))
     about_me = db.Column(db.Text)
-    member_since = db.Column(db.DateTime(), default = datetime.datetime.utcnow)
-    last_seen = db.Column(db.DateTime(), default = datetime.datetime.utcnow)
-    posts = db.relationship('Posts', backref = 'author', lazy = 'dynamic')
+    member_since = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
+    last_seen = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
+    posts = db.relationship('Posts', backref='author', lazy='dynamic')
 
 
 
@@ -124,12 +124,32 @@ class Users(db.Model, UserMixin):
 
     def is_authenticated(self):
         return True
+
     # 修复id属性不一致
     def get_id(self):
         try:
             return unicode(self.user_id)  # python 2
         except NameError:
             return str(self.user_id)  # python 3
+
+    @staticmethod
+    def generate_fake(count=100):
+        from sqlalchemy.exc import IntegrityError
+        from random import seed
+        import forgery_py
+
+        seed()
+        for i in range(count):
+            u = Users(username=forgery_py.internet.user_name(),
+                      email=forgery_py.internet.email_address(),
+                      password=forgery_py.lorem_ipsum.word(),
+                      location=forgery_py.address.city())
+            db.session.add(u)
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()
+
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self, permissions):
@@ -149,6 +169,21 @@ class Posts(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default= datetime.datetime.utcnow())
     author_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
+    @staticmethod
+    def generate_fake(count=100):
+        from random import  seed, randint
+        import forgery_py
+
+        seed()
+        user_count = Users.query.count()
+        for i in range(count):
+            u = Users.query.offset(randint(0, user_count - 1)).first()
+            p = Posts(title=forgery_py.lorem_ipsum.sentence(),
+                      body=forgery_py.lorem_ipsum.sentences(randint(1, 3)),
+                      timestamp=forgery_py.date.date(True),
+                      author=u)
+            db.session.add(p)
+            db.session.commit()
 
 
 @login_manager.user_loader
